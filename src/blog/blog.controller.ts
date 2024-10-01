@@ -1,6 +1,7 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { BlogService } from './blog.service';
 import { CreateBlogDto } from './dto/create-blog.dto';
+import { ValidateIdPipe } from 'src/pipes/validate-id.pipe';
 
 @Controller('/blog')
 export class BlogController {
@@ -15,5 +16,10 @@ export class BlogController {
     @Get()
     getAllPost() {
         return this.blogService.getPosts();
+    }
+
+    @Get('/:id')
+    getPostById(@Param('id', ValidateIdPipe) id: string) {
+        return this.blogService.getPost(id);
     }
 }

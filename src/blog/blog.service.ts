@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Blog, BlogDocument } from './schemas/blog.schema';
 import { Model } from 'mongoose';
@@ -17,5 +17,13 @@ export class BlogService {
     async getPosts(): Promise<Blog[]> {
         const blogs = await this.blogModel.find();
         return blogs
+    }
+
+    async getPost(id: string): Promise<never | Blog> {
+        const blog = await this.blogModel.findById(id)
+
+        if (!blog) throw new NotFoundException('El blog no existe');
+
+        return blog;
     }
 }
