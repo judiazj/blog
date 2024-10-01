@@ -39,4 +39,12 @@ export class BlogService {
 
     return blog;
   }
+
+  async deletePost(id: string): Promise<never | Blog> {
+    const blog = await this.blogModel.findByIdAndDelete(id);
+
+    if (!blog) throw new NotFoundException('El blog no existe');
+
+    return blog;
+  }
 }

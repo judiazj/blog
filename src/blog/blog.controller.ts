@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  Put,
+} from '@nestjs/common';
 import { BlogService } from './blog.service';
 import { CreateBlogDto } from './dto/create-blog.dto';
 import { ValidateIdPipe } from 'src/pipes/validate-id.pipe';
@@ -29,5 +37,10 @@ export class BlogController {
     @Body() updateBlogDto: UpdateBlogDto,
   ) {
     return this.blogService.updatePost(id, updateBlogDto);
+  }
+
+  @Delete(':id')
+  deletePost(@Param('id', ValidateIdPipe) id: string) {
+    return this.blogService.deletePost(id);
   }
 }
