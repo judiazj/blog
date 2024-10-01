@@ -6,8 +6,10 @@ import { Blog, BlogSchema } from './schemas/blog.schema';
 import { ValidateIdPipe } from 'src/pipes/validate-id.pipe';
 
 @Module({
-  imports: [MongooseModule.forFeature([{ name: Blog.name, schema: BlogSchema }])],
+  imports: [
+    MongooseModule.forFeature([{ name: Blog.name, schema: BlogSchema }]),
+  ],
   controllers: [BlogController],
-  providers: [BlogService, ValidateIdPipe]
+  providers: [BlogService, ValidateIdPipe],
 })
-export class BlogModule { }
+export class BlogModule {}

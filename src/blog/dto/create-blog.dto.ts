@@ -1,16 +1,20 @@
-import { IsString } from "class-validator";
-
+import { IsArray, IsNotEmpty, IsString } from 'class-validator';
 
 export class CreateBlogDto {
-    @IsString()
-    title: string;
+  @IsString()
+  @IsNotEmpty()
+  title: string;
 
-    @IsString()
-    content: string;
+  @IsString()
+  @IsNotEmpty()
+  content: string;
 
-    @IsString()
-    category: string;
+  @IsString()
+  @IsNotEmpty()
+  category: string;
 
-    @IsString({ each: true })
-    tags: string;
+  @IsArray()
+  @IsString({ each: true })
+  @IsNotEmpty({ each: true })
+  tags?: string[];
 }
